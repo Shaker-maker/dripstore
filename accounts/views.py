@@ -6,7 +6,7 @@ import uuid
 from django.core.mail import send_mail
 from django.conf import settings
 from django.urls import reverse
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .models import CustomUser
 
 # Create your views here.
@@ -84,3 +84,29 @@ def logout_view(request):
     logout(request)
     messages.success(request, 'You have been logged out.')
     return redirect('store:home')
+
+
+def check_email_username(request):
+    email = request.GET.get('email',None)
+    username = request.GET.get('username', None)
+
+
+    data = {}
+
+    if email:
+        exists = CustomUser.objects.filter(email=email).exists()
+        data['email_taken'] = exists
+
+    if username:
+        exists = CustomUser.objects.filter(username=username).exists()
+        data['username_taken'] = exists
+
+    return JsonResponse(data)
+
+
+from django.shortcuts import redirect
+from django.urls import reverse
+
+def password_reset_complete_redirect(request):
+    messages.success(request, "Password reset successful. You can now log in.")
+    return redirect(reverse('accounts:login'))

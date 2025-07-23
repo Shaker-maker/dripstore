@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load static %}
+    
 
 {% block content %}
 <h2>Register</h2>
@@ -7,4 +9,6 @@
     {{ form.as_p}}
     <button type="submit">Sign Up</button>
 </form>
+
+<script src="{% static 'accounts/js/validate.js' %}"></script>
 {% endblock %}
