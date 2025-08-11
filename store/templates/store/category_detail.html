@@ -1,0 +1,12 @@
+<h1>{{ category.name }}</h1>
+{% for product in products %}
+    <div>
+        <a href="{% url 'product_detail' product.slug %}">
+            <img src="{{ product.image.url }}" alt="" width="150">
+            <h2>{{ product.title }}</h2>
+
+        </a>
+        <p>Ksh{{ product.price }}</p>
+    </div>
+
+{% endfor %}
