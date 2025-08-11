@@ -25,6 +25,23 @@ templates/ - HTML templates
 dripstore/ - project configuration
 
 
+## Progress
+### ✅ Completed
+- **Accounts app**: Full authentication system with registration, login, logout.
+- **Store app**: 
+  - Models for `Category` and `Product` with unique slugs
+  - Admin panel with search, filters, and prepopulated slugs
+  - Product browsing by category
+  - Product detail view
+  - Category navigation on homepage
+  - Image uploads for products
+
+### 🔜 Next Steps
+- Add product search and filtering
+- Implement shopping cart and checkout
+- Style with Tailwind CSS for a **kith.com**-like design
+
+
 ## Installation
 ```bash
 git clone <repo-url>
