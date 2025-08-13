@@ -1,4 +1,11 @@
 <h1>{{ category.name }}</h1>
+
+<form action="" method="get">
+    <input type="text" name="q" placeholder="Search products..." value="{{request.GET.q}}">
+    <label>Min Price: <input type="number" name="min_price" value="{{ request.GET.min_price}}"></label>
+    <label>Max Price: <input type="number" name="max_price" value="{{ request.GET.max_price}}"></label>
+    <button type="submit">Apply</button>
+</form>
 {% for product in products %}
     <div>
         <a href="{% url 'product_detail' product.slug %}">

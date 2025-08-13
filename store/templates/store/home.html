@@ -1,24 +1,41 @@
 <h1>All Products</h1>
 
+<!-- Search Form-->
+ <form action="" method="get">
+    <input type="text" name="q" placeholder="Search products..." value="{{ request.GET.q }}">
+    <button type="submit">Search</button>
+ </form>
+
+ <!-- Price Range-->
+  <label>Min Price: <input type="number" name="min_price" value="{{ request.GET.min_price }}"></label>
+  <label>Max Price: <input type="number" name="max_price" value="{{ request.GET.max_price}}"> </label>
+  <button type="submit">Apply</button>
+
+ <!-- Category Navigation-->
 <nav>
     <ul>
         {% for category in categories %}
             <li>
-                <a href="{% url 'category_detail' category.slug %}">{{ category.name }}</a>
+                <a href="{% url 'category_detail' category.slug %}?q={{ request.GET.q }}&min_price={{ request.GET.min_price }}&max_price={{ request.GET.maxprice }}">{{ category.name }}</a>
             </li>
         {% endfor %}
     </ul>
 </nav>
+{% if products %}
 
-
-{% for product in products %}
-    <div>
-        <a href="{% url 'product_detail' product.slug %}">
-            <img src="{{ product.image.url}}" alt="" width="150">
-            <h2>{{ product.title }}</h2>
-        </a>
+    {% for product in products %}
+        <div>
+            <a href="{% url 'product_detail' product.slug %}">
+                <img src="{{ product.image.url}}" alt="" width="150">
+                <h2>{{ product.title }}</h2>
+            </a>
         <p>Ksh{{ product.price }}</p>
 
     </div>
 
-{% endfor %}
+    {% endfor %}
+
+{% else %}
+    <p>No products found</p>
+{% endif %}
+
