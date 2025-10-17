@@ -1,0 +1,31 @@
+<h1>{{ category.name }}</h1>
+
+<form action="" method="get" style="margin-bottom: 20px;">
+    <input type="text" name="q" placeholder="Search products..." value="{{ request.GET.q }}">
+    
+    <label>
+        Min Price:
+        <input type="number" name="min_price" value="{{ request.GET.min_price }}">
+    </label>
+    
+    <label>
+        Max Price:
+        <input type="number" name="max_price" value="{{ request.GET.max_price }}">
+    </label>
+    
+    <button type="submit">Apply</button>
+</form>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;">
+    {% for product in products %}
+        <div style="border: 1px solid #ddd; padding: 10px;">
+            <a href="{% url 'store:product_detail' product.slug %}">
+                <img src="{{ product.image.url }}" alt="{{ product.title }}" style="width: 100%;">
+                <h2>{{ product.title }}</h2>
+            </a>
+            <p>Ksh {{ product.price }}</p>
+        </div>
+    {% empty %}
+        <p>No products found.</p>
+    {% endfor %}
+</div>
